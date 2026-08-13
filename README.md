@@ -93,16 +93,3 @@ Cleaned tables were created using a `clean_` naming convention while keeping the
 This approach preserves the raw data and makes the cleaning process transparent and reproducible.
 
 ---
-
-## Identifying Subscription Orders
-
-An order is considered a **subscription order** when the order was created during an active subscription period.
-
-The subscription period is defined using the subscription start and end dates:
-
-```sql
-o.created_at >= u.subscription_start
-AND (
-    u.subscription_end IS NULL
-    OR o.created_at <= u.subscription_end
-)
